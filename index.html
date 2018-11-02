@@ -12,7 +12,7 @@
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+    <html lang="de">
     <script>
 
     var quiztitle = "MC-Quiz Grundlagen";
@@ -493,14 +493,14 @@ quiz = shuffle(quiz);
 		ol,ul 													{ list-style:none; }
 		strong 													{ font-weight:700; }
         h4 													    { font-weight:600; padding-top: 60px; padding-bottom: -100px;}
-		#frame 													{ width:auto; max-width: 800px; background:transparent; margin:3px auto; padding:10px; padding-top:20px; color:#333 !important; }
+		#frame 													{ width:auto; max-width: 800px; background:transparent; margin:2px auto; padding:30px; padding-top:20px; color:#333 !important; }
 		div#frame h2 											{ width:auto; border-bottom:1px solid #bdbdbd; padding:0 0 5px 0; font-size:30px; }
-		h3.question 											{ font-weight:normal; margin:20px 0; padding:0; font-style:normal; display:block; }
+		h3.question 											{ font-size: 20px; font-weight:bold; margin:20px 0; padding:0; font-style:normal; display:block; }
 		p.pager 												{ margin:5px 0 5px; color:#999; text-align:right; }
         .qnumber 												{ font-size: 25px; font-weight:bold;}
 		.score 													{ width:100%; display:inline-block; margin:30px 0; font-size:100px; text-align:center; }
 		img.question-image 										{ width:100%; height:auto; display:block; max-width:250px; margin:10px auto; border:1px solid #ccc; }
-		#choice-block 											{ display:block; list-style:none; margin:0; padding:0; cursor: pointer; }
+		#choice-block 											{ display:block; list-style:none; margin:0; padding:0;  cursor: pointer; }
 	/*	#submitbutton 											{ cursor:pointer; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; } */
 	/*	#submitbutton:hover 									{ background:#7b8da6; } */
 		#explanation 											{ width:auto; min-height:100px; margin:0 auto; padding:20px 0; text-align:center; }
@@ -510,6 +510,9 @@ quiz = shuffle(quiz);
 		.incorrect 												{ color:#f93939; font-size: 20px; display: block; margin-bottom: 5px; border-bottom: 1px #f93939 solid; padding-bottom: 5px; }
         h3 {font-style:normal; !important;}
         .btn-secondary {margin-top: 25px !important;}
+        body {
+ hyphens: auto;
+}
         /*.btn-secondary:hover {background-color:#2980b9}
         .btn-secondary {margin-top: 20px; background-color:#3498db}
         
