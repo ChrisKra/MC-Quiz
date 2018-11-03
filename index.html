@@ -105,7 +105,7 @@ if (!("scramble" in Array.prototype)) {
             "choices"       :   [
                                     "Abbildung der finanziellen Beziehung des Unternehmens zu seiner Umwelt",
                                     "Planung, Kontrolle und Steuerung des Betriebsgeschehens",
-                                    "Rechnungslegung/BilanzierungaufgrundgesetzlicherVorschriften",
+                                    "Rechnungslegung/Bilanzierung aufgrund gesetzlicher Vorschriften",
                                     "Erstellung des Jahresabschlusses"
                                 ],
             "correct"       :   "Planung, Kontrolle und Steuerung des Betriebsgeschehens",
@@ -141,7 +141,7 @@ if (!("scramble" in Array.prototype)) {
             "choices"       :   [
                                     "Monetärer Wert der in einer Wirtschaftsperiode abgegebenen Wirtschaftsgüter",
                                     "Zahlungsmittel, die einem Unternehmen innerhalb einer Periode zufließen",
-                                    "Monetärbewerteter,durchLeistungserstellungbedingterWertzuwachs",
+                                    "Monetärbewerteter, durch Leistungserstellung bedingter Wertzuwachs",
                                     "Wertzuwachs einer Periode (erfolgswirksam)"
                                 ],
             "correct"       :   "Monetärer Wert der in einer Wirtschaftsperiode abgegebenen Wirtschaftsgüter",
@@ -152,7 +152,7 @@ if (!("scramble" in Array.prototype)) {
             "image"         :   "",
             "choices"       :   [
                                     "Verbrauch bzw. Gebrauch von Wirtschaftsgütern (erfolgswirksam)",
-                                    "Monetärbewerteter, durchLeistungserstellung bedingter Güter- und Dienstleistungsverzehr",
+                                    "Monetärbewerteter, durch Leistungserstellung bedingter Güter- und Dienstleistungsverzehr",
                                     "Monetärer Wert der in einer Periode einem Unternehmen zugegangenen Wirtschaftsgüter",
                                     "Zahlungsmittel, die von einem Unternehmen innerhalb einer Periode abfließen"
                                 ],
@@ -508,11 +508,13 @@ quiz = shuffle(quiz);
 		.choice-box 											{ width:100%;  display:block;  text-align:center;  margin:5px auto !important; padding:10px 0 !important; border:1px solid #bdbdbd; }
 		.correct 												{ color:#2c3e50; font-size: 20px; display: block; margin-bottom: 5px; border-bottom: 1px #51a351 solid; padding-bottom: 5px; }
 		.incorrect 												{ color:#f93939; font-size: 20px; display: block; margin-bottom: 5px; border-bottom: 1px #f93939 solid; padding-bottom: 5px; }
+        
+        /*Custom CSS*/
         h3 {font-style:normal; !important;}
         .btn-secondary {margin-top: 25px !important;}
-        body {
- hyphens: auto;
-}
+        body { hyphens: auto; }
+        .choice-box { white-space:normal !important; word-wrap: break-word; }
+        .btn { padding-left: 10px !important; padding-right: 10px !important; }
         /*.btn-secondary:hover {background-color:#2980b9}
         .btn-secondary {margin-top: 20px; background-color:#3498db}
         
