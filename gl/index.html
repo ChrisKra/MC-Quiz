@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="initial-scale=1.0">
+    <title>MC-Quiz Buchführung und Rechnungswesen</title>
+    <!-- jquery for maximum compatibility -->
+	<!--<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <html lang="de">
+    <script>
+
+    var quiztitle = "MC-Quiz Grundlagen";
+
+    /**
+    * Set the information about your questions here. The correct answer string needs to match
+    * the correct choice exactly, as it does string matching. (case sensitive)
+    *
+    */
+
+/**
+*Let's create the randomization of the questions!
+*/
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+	    
+if (!("scramble" in Array.prototype)) {
+  Object.defineProperty(Array.prototype, "scramble", {
+    enumerable: false,
+    value: function() {
+      var o, i, ln = this.length;
+      while (ln--) {
+        i = Math.random() * (ln + 1) | 0;
+        o = this[ln];
+        this[ln] = this[i];
+        this[i] = o;
+      }
+      return this;
+    }
+  });
+}		
+	    
+    var quiz = [
+        {
+            "question"      :   "Welcher Teilbereich des Rechnungswesens ist dem <strong>externen</strong> Rechnungswesen zugeordnet?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Statistik- und Vergleichsrechnung",
+                                    "Kosten- und Leistungsrechnung",
+                                    "Finanzbuchhaltung",
+                                    "Planungsrechnung"
+                                ],
+            "correct"       :   "Finanzbuchhaltung",
+            "explanation"   :   "Finanzbuchhaltung",
+        },
+        {
+            "question"      :   "Das <strong>externe</strong> Rechnungswesen...",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ist unternehmensspezifisch gestaltbar",
+                                    "wird durch den Betriebsrat gestaltet",
+                                    "wird durch Wirtschaftsprüfer festgelegt",
+                                    "unterliegt gesetzlichen Vorschriften"
+                                ],
+            "correct"       :   "unterliegt gesetzlichen Vorschriften",
+            "explanation"   :   "unterliegt gesetzlichen Vorschriften",
+        },
+        {
+            "question"      :   "Wer ist <strong>kein</strong> Adressat des Jahresabschlusses?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Eigentümer",
+                                    "Gläubiger",
+                                    "Unternehmensleitung",
+                                    "Abschlussprüfer"
+                                ],
+            "correct"       :   "Abschlussprüfer",
+            "explanation"   :   "Abschlussprüfer",
+        },
+        {
+            "question"      :   "Was ist <strong>keine</strong> Aufgabe des <strong>externen</strong> Rechnungswesens?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Abbildung der finanziellen Beziehung des Unternehmens zu seiner Umwelt",
+                                    "Planung, Kontrolle und Steuerung des Betriebsgeschehens",
+                                    "Rechnungslegung/Bilanzierung aufgrund gesetzlicher Vorschriften",
+                                    "Erstellung des Jahresabschlusses"
+                                ],
+            "correct"       :   "Planung, Kontrolle und Steuerung des Betriebsgeschehens",
+            "explanation"   :   "Planung, Kontrolle und Steuerung des Betriebsgeschehens",
+        },
+        {
+            "question"      :   "Das Betriebsergebnis ergibt sich durch Saldierung von ...",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Erlös und Kosten",
+                                    "Ertrag und Aufwand",
+                                    "Einnahme und Ausgabe",
+                                    "Einzahlung und Auszahlung"
+                                ],
+            "correct"       :   "Erlös und Kosten",
+            "explanation"   :   "Erlös und Kosten",
+        },
+        {
+            "question"      :   "Die Saldierung von Einnahmen und Ausgaben ergibt ...",
+            "image"         :   "",
+            "choices"       :   [
+                                    "das Betriebsergebnis",
+                                    "das Jahresergebnis",
+                                    "den Finanzsaldo",
+                                    "den Zahlungssaldo"
+                                ],
+            "correct"       :   "den Finanzsaldo",
+            "explanation"   :   "den Finanzsaldo",
+        },
+        {
+            "question"      :   "Markieren Sie die korrekte Definition für Einnahmen!",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Monetärer Wert der in einer Wirtschaftsperiode abgegebenen Wirtschaftsgüter",
+                                    "Zahlungsmittel, die einem Unternehmen innerhalb einer Periode zufließen",
+                                    "Monetärbewerteter, durch Leistungserstellung bedingter Wertzuwachs",
+                                    "Wertzuwachs einer Periode (erfolgswirksam)"
+                                ],
+            "correct"       :   "Monetärer Wert der in einer Wirtschaftsperiode abgegebenen Wirtschaftsgüter",
+            "explanation"   :   "Monetärer Wert der in einer Wirtschaftsperiode abgegebenen Wirtschaftsgüter",
+        },
+        {
+            "question"      :   "Markieren Sie die korrekte Definition für Kosten!",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Verbrauch bzw. Gebrauch von Wirtschaftsgütern (erfolgswirksam)",
+                                    "Monetärbewerteter, durch Leistungserstellung bedingter Güter- und Dienstleistungsverzehr",
+                                    "Monetärer Wert der in einer Periode einem Unternehmen zugegangenen Wirtschaftsgüter",
+                                    "Zahlungsmittel, die von einem Unternehmen innerhalb einer Periode abfließen"
+                                ],
+            "correct"       :   "Monetärbewerteter, durch Leistungserstellung bedingter Güter- und Dienstleistungsverzehr",
+            "explanation"   :   "Monetärbewerteter, durch Leistungserstellung bedingter Güter- und Dienstleistungsverzehr",
+        },
+        {
+            "question"      :   "„Monetärer Wert der in einer Periode einem Unternehmen zugegangenen Wirtschaftsgüter“ ist die Definition für ...",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgaben",
+                                    "Einnahmen",
+                                    "Aufwendungen",
+                                    "Erlös"
+                                ],
+            "correct"       :   "Ausgaben",
+            "explanation"   :   "Ausgaben",
+        },
+        {
+            "question"      :   "“Zahlungsmittel, die von einem Unternehmen innerhalb einer Periode abfließen“ ist die Definition für ...",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlungen",
+                                    "Einzahlungen",
+                                    "Einnahmen",
+                                    "Erträge"
+                                ],
+            "correct"       :   "Auszahlungen",
+            "explanation"   :   "Auszahlungen",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Bezahlung von Maschinen, die in der Vorperiode geliefert wurden“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Auszahlung und Ausgabe",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Auszahlung",
+            "explanation"   :   "Auszahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Bezahlung von Maschinen, die in der Folgeperiode geliefert werden“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Auszahlung und Ausgabe",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Auszahlung",
+            "explanation"   :   "Auszahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Einkauf von Waren für 600 € auf Ziel“ ist eine (Hinweis: Hier ist immer die Annahme, dass das Wirtschaftsgut gleich dem Käufer zugeht (und abgeht im Verkaufsfall))",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Auszahlung und Ausgabe",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Ausgabe",
+            "explanation"   :   "Ausgabe",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Einkauf von Rohstoffen mit Barbezahlung“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Auszahlung und Ausgabe",
+                                    "Einnahme",
+                                    "Einzahlung und Einnahme"
+                                ],
+            "correct"       :   "Auszahlung und Ausgabe",
+            "explanation"   :   "Auszahlung und Ausgabe",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Einkauf von Holzbrettern für 200 € auf Ziel“ ist ein(e) (Hinweis: Da keine Angabe, wann der Verbrauch stattfindet, wird nicht geprüft ob ein Aufwand vorherrscht; also: Aufwand wird nur bei expliziter Angabe des Verbrauchs geprüft)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Ausgabe",
+            "explanation"   :   "Ausgabe",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Einkauf von Holzbrettern für 200 € auf Ziel, die in der übernächsten Periode verbraucht werden“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Ausgabe",
+            "explanation"   :   "Ausgabe",
+        },    
+        {
+            "question"      :   "Der Geschäftsvorfall „Einkauf von Holzbrettern für 200 € auf Ziel, die sofort verbraucht werden“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Ausgabe und Aufwand",
+            "explanation"   :   "Ausgabe und Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Planmäßige lineare Abschreibung einer Produktionsmaschine“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Aufwand",
+            "explanation"   :   "Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Außerplanmäßige Abschreibung einer Produktionsmaschine“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Aufwand",
+            "explanation"   :   "Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Bildung von Rückstellungen“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Aufwand",
+            "explanation"   :   "Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Verkauf von Waren für 700 € auf Kredit“ ist ein(e) (HINWEIS: Zum Zeitpunkt des Geschäftsvorfalls wird ein Ertrag verbucht: „Forderungen an Umsatzerlöse 700“ (Umsatzerlöse sind eine Ertragsform). Am Periodenende wird „Materialaufwand an Waren“ gebucht. Der Saldo aus Ertrag und Aufwand ergibt den Gewinn (Ertrag > Aufwand) oder Verlust.)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einnahme",
+                                    "Ausgabe",
+                                    "Gewinn",
+                                    "Aufwand"
+                                ],
+            "correct"       :   "Einnahme",
+            "explanation"   :   "Einnahme",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Wertminderung eines Geschäftsfahrzeuges“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Aufwand",
+            "explanation"   :   "Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Bezahlung von Miete für ein Geschäftsbüro per Überweisung“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Auszahlung und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Auszahlung, Ausgabe und Aufwand",
+            "explanation"   :   "Auszahlung, Ausgabe und Aufwand",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Kauf einer Produktionsmaschine zum Preis von 100.000 €“ ist ein(e) (HINWEIS: Hinweis: Da keine Angabe, ob Kauf auf Kredit oder in bar => unklar, ob Auszahlung oder nicht, hier aber nicht relevant zur Beantwortung der MC-Aufgabe)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ausgabe",
+                                    "Ausgabe und Aufwand",
+                                    "Aufwand",
+                                    "Auszahlung, Ausgabe und Aufwand"
+                                ],
+            "correct"       :   "Ausgabe",
+            "explanation"   :   "Ausgabe",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Gewährung eines Barkredites in Höhe von 1.111 €“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Einnahme",
+                                    "Einzahlung",
+                                    "Einnahme und Einzahlung"
+                                ],
+            "correct"       :   "Auszahlung",
+            "explanation"   :   "Auszahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Tilgung eines Darlehens in Höhe von 50.000 €“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Auszahlung",
+                                    "Auszahlung und Ausgabe",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Auszahlung",
+            "explanation"   :   "Auszahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Barverkauf von Waren für 300 €“ ist eine (HINWEIS: grundsätzlich auch Ertrag (Umsatzerlöse), aber hier nicht als Antwort vorgesehen.)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einzahlung",
+                                    "Einzahlung und Einnahme",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Einzahlung und Einnahme",
+            "explanation"   :   "Einzahlung und Einnahme",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Verkauf von Sachvermögen zum Buchwert von 5.000 €“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einnahme",
+                                    "Ausgabe",
+                                    "Ertrag",
+                                    "Aufwand"
+                                ],
+            "correct"       :   "Einnahme",
+            "explanation"   :   "Einnahme",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Verkauf von Waren für 600 € auf Kredit“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einzahlung",
+                                    "Einzahlung und Einnahme",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Einnahme",
+            "explanation"   :   "Einnahme",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Verkauf von Waren für 600 € gegen Barzahlung“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einzahlung",
+                                    "Auszahlung",
+                                    "Ausgabe",
+                                    "Keine der vorherigen Antworten ist richtig"
+                                ],
+            "correct"       :   "Einzahlung",
+            "explanation"   :   "Einzahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Werterhöhung eigener Sachvermögensgegenstände um 100 €“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einnahme",
+                                    "Einnahme und Ertrag",
+                                    "Ertrag",
+                                    "Aufwand"
+                                ],
+            "correct"       :   "Ertrag",
+            "explanation"   :   "Ertrag",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Kunde bezahlt für eine Dienstleistung 6.000 € in bar“ ist ein(e)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einnahme",
+                                    "Einnahme und Ertrag",
+                                    "Ertrag",
+                                    "Einzahlung, Einnahme und Ertrag"
+                                ],
+            "correct"       :   "Einzahlung, Einnahme und Ertrag",
+            "explanation"   :   "Einzahlung, Einnahme und Ertrag",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Kredit an befreundetes Unternehmen wird von diesem getilgt“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einzahlung",
+                                    "Einzahlung und Einnahme",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Einzahlung",
+            "explanation"   :   "Einzahlung",
+        },
+        {
+            "question"      :   "Der Geschäftsvorfall „Aufnahme eines Barkredites (z.B. Bankdarlehen) über 95.000 €“ ist eine",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Einzahlung",
+                                    "Auszahlung",
+                                    "Einnahme",
+                                    "Ausgabe"
+                                ],
+            "correct"       :   "Einzahlung",
+            "explanation"   :   "Einzahlung",
+        },
+        {
+            "question"      :   "Im nationalen deutschen Handelsrecht gilt",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur das HGB",
+                                    "das HGB und GoB",
+                                    "das HGB, GoB und IFRS",
+                                    "das HGB, GoB, IFRS und US-GAAP"
+                                ],
+            "correct"       :   "das HGB und GoB",
+            "explanation"   :   "das HGB und GoB",
+        },
+        {
+            "question"      :   "Welche der vorliegenden Rechnungslegungsvorschriften ist <strong>nicht</strong> gesetzlich definiert?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "HGB",
+                                    "GoB",
+                                    "IFRS",
+                                    "US-GAAP"
+                                ],
+            "correct"       :   "GoB",
+            "explanation"   :   "GoB",
+        },
+        {
+            "question"      :   "Wenn Rechtsvorschriften des Aktiengesetzes (AktG) für eine Aktiengesellschaft von denen des HGB abweichen, …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "hat das HGB Vorrang.",
+                                    "Kann die für das Unternehmen günstigere Alternative gewählt werden.",
+                                    "muss sinnvoll abgewogen werden, welches Gesetz Anwendung findet.",
+                                    "hat das AktG Vorrang."
+                                ],
+            "correct"       :   "hat das AktG Vorrang.",
+            "explanation"   :   "hat das AktG Vorrang.",
+        },
+        {
+            "question"      :   "Kommen für Einzelkaufleute und Personenhandelsgesellschaften weitere Vorschriften zur Rechnungslegung über das HGB hinaus in Betracht?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Ja, das AktG und - möglicherweise - branchenspezifische Regelungen.",
+                                    "Ja, das GmbHG und - möglicherweise - branchenspezifische Regelungen.",
+                                    "Ja, PublG und - möglicherweise - branchenspezifische Regelungen.",
+                                    "Möglicherweise branchenspezifische Regelungen."
+                                ],
+            "correct"       :   "Ja, PublG und - möglicherweise - branchenspezifische Regelungen.",
+            "explanation"   :   "Ja, PublG und - möglicherweise - branchenspezifische Regelungen.",
+        },
+        {
+            "question"      :   "Die nicht am Kapitalmarkt orientierte Langsam OHG, die keine Tochterunternehmen besitzt, …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "muss keinen Einzelabschluss erstellen.",
+                                    "muss einen Einzelabschluss erstellen.",
+                                    "kann einen Konzernabschluss erstellen, um ihr Image aufzuwerten.",
+                                    "muss sowohl einen Einzelabschluss als auch einen Konzernabschluss erstellen."
+                                ],
+            "correct"       :   "muss einen Einzelabschluss erstellen.",
+            "explanation"   :   "muss einen Einzelabschluss erstellen.",
+        },
+        {
+            "question"      :   "Die nicht kapitalmarktorientierte Schnöller OHG, ansässig in Deutschland mit Tochterunternehmen im Inund Ausland und insgesamt 150 Arbeitnehmern und einem Umsatz von ca. 5 Millionen € in den vergangenen drei Geschäftsjahren …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "muss einen Einzelabschluss nach HGB erstellen.",
+                                    "muss einen Einzelabschluss nach IFRS erstellen.",
+                                    "darf keinen Konzernabschluss erstellen, weil sie den größenabhängigen Befreiungen von § 293 HGB nicht genügt.",
+                                    "muss sowohl einen Einzelabschluss nach HGB als auch einen Konzernabschluss nach HGB erstellen."
+                                ],
+            "correct"       :   "muss einen Einzelabschluss nach HGB erstellen.",
+            "explanation"   :   "muss einen Einzelabschluss nach HGB erstellen.",
+        },
+        {
+            "question"      :   "Die kapitalmarktorientierte Fast OHG, ansässig in Deutschland mit Tochterunternehmen im In- und Ausland und insgesamt 150 Arbeitnehmern und einem Umsatz von ca. 5 Millionen € in den vergangenen drei Geschäftsjahren …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "muss nur den Einzelabschluss (EA) erstellen.",
+                                    "muss keinen Konzernabschluss erstellen, weil sie den größenabhängigen Befreiungen von § 293 HGB genügt.",
+                                    "muss einen EA und kann einen Konzernabschluss nach IFRS erstellen, um ihr Image aufzuwerten.",
+                                    "muss sowohl einen Einzelabschluss nach HGB als auch einen Konzernabschluss nach IFRS erstellen."
+                                ],
+            "correct"       :   "muss sowohl einen Einzelabschluss nach HGB als auch einen Konzernabschluss nach IFRS erstellen.",
+            "explanation"   :   "muss sowohl einen Einzelabschluss nach HGB als auch einen Konzernabschluss nach IFRS erstellen.",
+        },
+        {
+            "question"      :   "Die nicht kapitalmarktorientierte Slow AG ansässig in Deutschland mit Tochterunternehmen im In- und Ausland und insgesamt 350 Arbeitnehmern und einem Umsatz von ca. 50 Millionen € jeweils in den vergangenen drei Geschäftsjahren …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "muss einen Einzelabschluss nach HGB aber keinen Konzernabschluss erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach IFRS erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB oder IFRS erstellen."
+                                ],
+            "correct"       :   "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB oder IFRS erstellen.",
+            "explanation"   :   "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB oder IFRS erstellen.",
+        },
+        {
+            "question"      :   "Die kapitalmarktorientierte Schnöllerle AG, ansässig in Deutschland mit Tochterunternehmen ausschließlich im Inland",
+            "image"         :   "",
+            "choices"       :   [
+                                    "muss einen Einzelabschluss (EA) nach HGB und einen Konzernabschluss nach HGB erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB oder IFRS erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach IFRS erstellen.",
+                                    "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach HGB und IFRS erstellen."
+                                ],
+            "correct"       :   "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach IFRS erstellen.",
+            "explanation"   :   "muss einen Einzelabschluss nach HGB und einen Konzernabschluss nach IFRS erstellen.",
+        },
+        {
+            "question"      :   "Für einen Einzelunternehmer gelten handelsrechtlich … (HINWEIS: Anmerkung: Handelsrechtlich heißt, dass hier nur Vorschriften des HGB betrachtet werden.)",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "die §§ 238 bis 335 HGB."
+                                ],
+            "correct"       :   "nur die §§ 238 bis 263 HGB.",
+            "explanation"   :   "nur die §§ 238 bis 263 HGB.",
+        },
+        {
+            "question"      :   "Für eine AG ohne Tochterunternehmen gelten handelsrechtlich …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "die §§ 238 bis 335 HGB."
+                                ],
+            "correct"       :   "nur die §§ 238 bis 289f HGB.",
+            "explanation"   :   "nur die §§ 238 bis 289f HGB.",
+        },
+        {
+            "question"      :   "Für eine OHG gelten handelsrechtlich …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "die §§ 238 bis 335 HGB."
+                                ],
+            "correct"       :   "nur die §§ 238 bis 263 HGB.",
+            "explanation"   :   "nur die §§ 238 bis 263 HGB.",
+        },
+        {
+            "question"      :   "Die Vorschriften für einen Konzern …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "sind eigenständig.",
+                                    "sind in den §§ 238 bis 263 HGB geregelt.",
+                                    "sind in den §§ 263 bis 289f HGB geregelt.",
+                                    "bauen auf den Normen auf, die für alle Kaufleute und für Kapitalgesellschaften gelten."
+                                ],
+            "correct"       :   "bauen auf den Normen auf, die für alle Kaufleute und für Kapitalgesellschaften gelten.",
+            "explanation"   :   "bauen auf den Normen auf, die für alle Kaufleute und für Kapitalgesellschaften gelten.",
+        },
+        {
+            "question"      :   "Für eine GmbH ohne Tochterunternehmen gelten handelsrechtlich …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "die §§ 238 bis 335 HGB."
+                                ],
+            "correct"       :   "nur die §§ 238 bis 289f HGB.",
+            "explanation"   :   "nur die §§ 238 bis 289f HGB.",
+        },
+        {
+            "question"      :   "Für eine GmbH mit Tochterunternehmen gelten handelsrechtlich …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "die §§ 238 bis 335 HGB."
+                                ],
+            "correct"       :   "die §§ 238 bis 335 HGB.",
+            "explanation"   :   "die §§ 238 bis 335 HGB.",
+        },
+        {
+            "question"      :   "Für eine GmbH ohne Tochterunternehmen gelten …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "nur die §§ 264 bis 289f HGB.",
+                                    "nur die §§ 238 bis 263 HGB und das GmbHG.",
+                                    "nur die §§ 238 bis 289f HGB.",
+                                    "nur die §§ 238 bis 289f HGB und das GmbHG."
+                                ],
+            "correct"       :   "nur die §§ 238 bis 289f HGB und das GmbHG.",
+            "explanation"   :   "nur die §§ 238 bis 289f HGB und das GmbHG.",
+        },
+        {
+            "question"      :   "Die Rechnungslegungsvorschriften des HGB funktionieren – vereinfacht ausgedrückt – nach dem Prinzip …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "„vom Allgemeinen zum Speziellen“.",
+                                    "„vom Speziellen zum Allgemeinen“.",
+                                    "„vom Schwierigem zum Trivialen“.",
+                                    "der Trennung aller Rechtsformen in spezielle Gesetzestexte."
+                                ],
+            "correct"       :   "„vom Allgemeinen zum Speziellen“.",
+            "explanation"   :   "„vom Allgemeinen zum Speziellen“.",
+        },
+        {
+            "question"      :   "Dürfen die Vorschriften der §§ 264 ff. HGB grundsätzlich auch von kleinen Personenhandelsgesellschaften und Einzelkaufleuten angewandt werden?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Nein, nur die §§ 238-263 HGB dürfen (und müssen) angewandt werden.",
+                                    "Nein, nur die §§ 1-263 HGB dürfen (und müssen) angewandt werden.",
+                                    "Nein, die §§ 264 ff. HGB müssen angewandt werden. Es besteht Pflicht und nicht Wahlrecht.",
+                                    "Grundsätzlich ja, jedoch freiwillig; fraglich jedoch bei Steuerabgrenzung (§ 274 HGB)."
+                                ],
+            "correct"       :   "Grundsätzlich ja, jedoch freiwillig; fraglich jedoch bei Steuerabgrenzung (§ 274 HGB).",
+            "explanation"   :   "Grundsätzlich ja, jedoch freiwillig; fraglich jedoch bei Steuerabgrenzung (§ 274 HGB).",
+        },
+        {
+            "question"      :   "Die Architektur-AG ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "ein Formkaufmann gemäß § 6 HGB.",
+            "explanation"   :   "ein Formkaufmann gemäß § 6 HGB.",
+        },
+        {
+            "question"      :   "Die A-B-OHG, die umfangreiche inländische und ausländische Immobiliengeschäfte betreibt, ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "ein Formkaufmann gemäß § 6 HGB.",
+            "explanation"   :   "ein Formkaufmann gemäß § 6 HGB.",
+        },
+        {
+            "question"      :   "Die Kultur-GmbH, die sich mit der Durchführung von Ausstellungen für unbekannte Künstler auf gemeinnütziger Basis befasst, ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "ein Formkaufmann gemäß § 6 HGB.",
+            "explanation"   :   "ein Formkaufmann gemäß § 6 HGB.",
+        },
+        {
+            "question"      :   "Otto Meier betreibt einen kleinen Kiosk, der nur gelegentlich geöffnet hat und dessen Umsatz höchstens 10.000 € pro Geschäftsjahr beträgt. Er ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "kein Kaufmann.",
+            "explanation"   :   "kein Kaufmann.",
+        },
+        {
+            "question"      :   "Rechtsanwalt Hans Rechtslinks betreibt seine Kanzlei in Würzburg und erzielt einen jährlichen Umsatz von ca. 12.000.000 €. Er ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "kein Kaufmann.",
+            "explanation"   :   "kein Kaufmann.",
+        },
+        {
+            "question"      :   "Die Schnöller OHG, die gerade erst gegründet wurde und noch nicht ins Handelsregister eingetragen wurde und (noch) kein Handelsgewerbe betreibt, ist …",
+            "image"         :   "",
+            "choices"       :   [
+                                    "ein Istkaufmann gemäß § 1 HGB.",
+                                    "kein Kaufmann.",
+                                    "ein Formkaufmann gemäß § 6 HGB.",
+                                    "ein Kann-Kaufmann gemäß § 2 HGB."
+                                ],
+            "correct"       :   "kein Kaufmann.",
+            "explanation"   :   "kein Kaufmann.",
+        },
+        {
+            "question"      :   "Welcher Grundsatz ist <strong>nicht</strong> den Rahmengrundsätzen der GoB zuzuordnen?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Vollständigkeit",
+                                    "Vorsicht",
+                                    "Richtigkeit und Willkürfreiheit",
+                                    "Klarheit und Übersichtlichkeit"
+                                ],
+            "correct"       :   "Vorsicht",
+            "explanation"   :   "Vorsicht",
+        },
+        {
+            "question"      :   "Welcher Grundsatz ist <strong>nicht</strong> den Abgrenzungsgrundsätzen der GoB zuzuordnen?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Imparitätsprinzip",
+                                    "Realisationsprinzip",
+                                    "Prinzip der Periodenabgrenzung",
+                                    "Einzelbewertung"
+                                ],
+            "correct"       :   "Einzelbewertung",
+            "explanation"   :   "Einzelbewertung",
+        },
+        {
+            "question"      :   "Welcher Grundsatz ist <strong>nicht</strong> den ergänzenden Grundsätzen der GoB zuzuordnen?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Stetigkeit",
+                                    "Vorsicht",
+                                    "Imparitätsprinzip",
+                                    "Fortführungsgrundsatz"
+                                ],
+            "correct"       :   "Imparitätsprinzip",
+            "explanation"   :   "",
+        },
+        {
+            "question"      :   "Was stellt der Verkauf von fertigen Erzeugnissen (FE) auf Ziel für das verkaufende Unternehmen dar?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Eine Einzahlung, aber keinen Ertrag.",
+                                    "Keine Einnahme, aber einen Ertrag.",
+                                    "Eine Einnahme, aber keine Einzahlung.",
+                                    "Keine der oben genannten Antwortmöglichkeiten ist richtig."
+                                ],
+            "correct"       :   "Eine Einnahme, aber keine Einzahlung.",
+            "explanation"   :   "Eine Einnahme, aber keine Einzahlung.",
+        },
+        {
+            "question"      :   "Das betriebswirtschaftliche Rechnungswesen gliedert sich in mehrere Teilbereiche. Was ist kein Teilbereich des internen Rechnungswesens?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Planungsrechnung",
+                                    "Finanzbuchhaltung",
+                                    "Statistik- und Vergleichsrechnung",
+                                    "Kosten- und Leistungsrechnung"
+                                ],
+            "correct"       :   "Finanzbuchhaltung",
+            "explanation"   :   "Finanzbuchhaltung",
+        },
+        {
+            "question"      :   "Das betriebswirtschaftliche Rechnungswesen untergliedert sich in mehrere Teilbereiche. Was ist <strong>kein</strong> Bestandteil des <strong>externen</strong> Rechnungswesens?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Buchführung",
+                                    "Finanzplanung",
+                                    "Inventar",
+                                    "Jahresabschluss"
+                                ],
+            "correct"       :   "Finanzplanung",
+            "explanation"   :   "Finanzplanung",
+        },
+        {
+            "question"      :   "Der Jahresabschluss ist nach den Grundsätzen ordnungsmäßiger Buchführung (GoB) aufzustellen. Was zählt <strong>nicht</strong> zu den <strong>Rahmengrundsätzen</strong> bei den GoB?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Richtigkeit",
+                                    "Vollständigkeit",
+                                    "Vorsicht",
+                                    "Willkürfreiheit"
+                                ],
+            "correct"       :   "Vorsicht",
+            "explanation"   :   "Vorsicht",
+        },
+        {
+            "question"      :   "Der Jahresabschluss ist nach den GoB (Grundsätze ordnungsmäßiger Buchführung) aufzustellen. Was zählt nicht zu den Abgrenzungsgrundsätzen bei den GoB?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Realisationsprinzip",
+                                    "Prinzip der Periodenabgrenzung",
+                                    "Vollständigkeit",
+                                    "Imparitätsprinzip"
+                                ],
+            "correct"       :   "Vollständigkeit",
+            "explanation"   :   "Vollständigkeit",
+        },
+        {
+            "question"      :   "In welchem Fall ist die Auszahlung zugleich eine Ausgabe?",
+            "image"         :   "",
+            "choices"       :   [
+                                    "Kauf von Ware auf Ziel",
+                                    "Barkauf von Rohstoffen",
+                                    "Bezahlung einer Rechnung für eine Rohstofflieferung in der Vorperiode",
+                                    "Zugang von Waren, die in einer früheren Periode bezahlt wurden"
+                                ],
+            "correct"       :   "Barkauf von Rohstoffen",
+            "explanation"   :   "Barkauf von Rohstoffen",
+        },
+    ];
+
+//use this for IE syntax error at => : ECMA script 6 not supported in IE 11 :(
+//quiz.forEach(function(q){ return q.choices.scramble()});
+
+//use this for ECMA script 6
+quiz.forEach(q => q.choices.scramble());
+//console.log(quiz[0].choices);
+		
+quiz = shuffle(quiz);
+	    
+    /******* No need to edit below this line *********/
+    var currentquestion = 0, score = 0, submt=true, picked;
+
+    jQuery(document).ready(function($){
+
+        /**
+         * HTML Encoding function for alt tags and attributes to prevent messy
+         * data appearing inside tag attributes.
+         */
+        function htmlEncode(value){
+          return $(document.createElement('div')).text(value).html();
+        }
+
+        /**
+         * This will add the individual choices for each question to the ul#choice-block
+         *
+         * @param {choices} array The choices from each question
+         */
+		function addChoices(choices){
+			if(typeof choices !== "undefined" && $.type(choices) == "array"){
+				$('#choice-block').empty();
+				for(var i=0;i<choices.length; i++){
+				$(document.createElement('li')).addClass('choice choice-box btn').attr('data-index', i).text(choices[i]).appendTo('#choice-block');
+				}
+			}
+		}
+        
+        /**
+         * Resets all of the fields to prepare for next question
+         */
+		function nextQuestion(){
+			submt = true;
+			$('#explanation').empty();
+			$('#question').text(quiz[currentquestion]['question']);
+			$('#pager').text('Frage ' + Number(currentquestion + 1) + ' von ' + quiz.length);
+			if(quiz[currentquestion].hasOwnProperty('image') && quiz[currentquestion]['image'] != ""){
+				if($('#question-image').length == 0){
+					$(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question'])).insertAfter('#question');
+				} else {
+					$('#question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question']));
+				}
+			} else {
+				$('#question-image').remove();
+			}
+			addChoices(quiz[currentquestion]['choices']);
+			setupButtons();
+			
+			jQuery(document).ready(function($){
+				$("#question").html(function(){
+					var text= $(this).text().trim().split(" ");
+					var first = text.shift();
+					return (text.length > 0 ? "<span class='number'>"+ first +"</span> " : first) + text.join(" ");
+				});
+				
+				$('p.pager').each(function(){
+					var text = $(this).text().split(' ');
+					if(text.length < 2)
+						return;
+					
+					text[1] = '<span class="qnumber">'+text[1]+'</span>';
+					$(this).html(
+						text.join(' ')
+					);
+				});
+				
+			});
+			
+        }
+
+        /**
+         * After a selection is submitted, checks if its the right answer
+         *
+         * @param {choice} number The li zero-based index of the choice picked
+         */
+        function processQuestion(choice){
+            if(quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']){
+				$('.choice').eq(choice).addClass('btn-success').css({'font-weight':'bold', 'border-color':'#2c3e50', 'color':'#fff'});
+				$('#explanation').html('<span class="correct">RICHTIG!</span> ' + htmlEncode(quiz[currentquestion]['explanation']));
+				score++;
+			} else {
+                $('.choice').eq(choice).addClass('btn-danger').css({'font-weight':'bold', 'border-color':'#f93939', 'color':'#fff'});
+                $('#explanation').html('<span class="incorrect">FALSCH!</span> ' + htmlEncode(quiz[currentquestion]['explanation']));
+            }
+            currentquestion++;
+
+			if(currentquestion == quiz.length){
+				$('#submitbutton').html('QUIZ ERGEBNIS').removeClass('btn-secondary').addClass('btn-secondary').css({'border-color':'#3a87ad', 'color':'#fff'}).on('click', function(){
+					$(this).text('QUIZ ERGEBNIS').on('click');
+					endQuiz();
+				})
+				
+			} else if (currentquestion < quiz.length){
+				$('#submitbutton').html('NÄCHSTE FRAGE  &raquo;').removeClass('btn-secondary').addClass('btn-secondary').css({'font-weight':'bold', 'border-color':'#faa732', 'color':'#fff'}).on('click', function(){
+					$(this).text('- ANTWORT ANSEHEN -').removeClass('btn-secondary').addClass('btn-secondary').css({'font-weight':'bold', 'border-color':'#2c3e50', 'color':'#fff'}).on('click');
+					nextQuestion();
+				})
+			} else {
+				//	$('#submitbutton').html('NEXT QUESTION &raquo;').on('click', function(){
+				//		$(this).text('- CHECK ANSWER -').css({'color':'inherit'}).on('click');
+				//	})
+			}
+
+			
+		}
+
+        /**
+         * Sets up the event listeners for each button.
+         */
+		function setupButtons(){
+			$('.choice').on('click', function(){
+				picked = $(this).attr('data-index');
+				$('.choice').removeAttr('style').off('mouseout mouseover');
+				$(this).css({'font-weight':'bold', 'border-color':'#007bff', 'color':'#007bff'});
+				if(submt){
+					submt=false;
+					$('#submitbutton').css({'color':'#fff','cursor':'pointer'}).on('click', function(){
+						$('.choice').off('click');
+						$(this).off('click');
+						processQuestion(picked);
+					});
+				}
+			})
+		}
+        
+        /**
+         * Quiz ends, display a message.
+         */
+		function endQuiz(){
+			$('#explanation').empty();
+			$('#question').empty();
+			$('#choice-block').empty();
+			$('#submitbutton').remove();
+			$('.rsform-block-submit').addClass('show');
+			$('#question').text("Du hast " + score + " von " + quiz.length + " Fragen richtig beantwortet.");
+			$(document.createElement('h4')).addClass('score').text(Math.round(score/quiz.length * 100) + '%').insertAfter('#question');			
+		}
+
+        /**
+         * Runs the first time and creates all of the elements for the quiz
+         */
+		function init(){
+			//add title
+			if(typeof quiztitle !== "undefined" && $.type(quiztitle) === "string"){
+				$(document.createElement('h2')).text(quiztitle).appendTo('#frame');
+			} else {
+				$(document.createElement('h2')).text("Quiz").appendTo('#frame');
+			}
+			
+			//add pager and questions
+			if(typeof quiz !== "undefined" && $.type(quiz) === "array"){
+				//add pager
+				$(document.createElement('p')).addClass('pager').attr('id','pager').text('Frage 1 von ' + quiz.length).appendTo('#frame');
+				//add first question
+				$(document.createElement('h3')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#frame');
+				//add image if present
+				if(quiz[0].hasOwnProperty('image') && quiz[0]['image'] != ""){
+					$(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[0]['image']).attr('alt', htmlEncode(quiz[0]['question'])).appendTo('#frame');
+				}
+				
+				$(document.createElement('p')).addClass('explanation').attr('id','explanation').html('').appendTo('#frame');
+				
+				//questions holder
+				$(document.createElement('ul')).attr('id', 'choice-block').appendTo('#frame');
+				
+				//add choices
+				addChoices(quiz[0]['choices']);
+				
+				//add submit button
+				$(document.createElement('div')).addClass('btn-secondary choice-box').attr('id', 'submitbutton').text('ANTWORT ANSEHEN').css({'font-weight':'bold', 'color':'#fff','padding':'30px 0','border-radius':'.25rem'}).appendTo('#frame');
+				
+				setupButtons();
+			}
+		}
+	
+		init();
+	
+	});
+		
+	jQuery(document).ready(function($){			
+		$("#question").html(function(){
+		var text= $(this).text().trim().split(" ");
+		var first = text.shift();
+			return (text.length > 0 ? "<span class='number'>"+ first +"</span> " : first) + text.join(" ");
+		});
+		
+		$('p.pager').each(function(){
+			var text = $(this).text().split(' ');
+			if(text.length < 2)
+				return;
+			
+			text[1] = '<span class="qnumber">'+text[1]+'</span>';
+			$(this).html(
+				text.join(' ')
+			);
+		});
+
+	});	
+
+		function copyText() {
+			var output = document.getElementById("frame").innerHTML;
+			document.getElementById("placecontent").value = output;
+		}
+	    
+    </script>
+    <style type="text/css" media="all">
+		input 													{ height:30px  }
+		input[type=checkbox]									{ height:30px !important; margin-top:-3px !important; margin-right:5px !important; box-shadow:none; background-color:#ffffff; position:relative !important; }
+		textarea												{ width: 90%; margin: 0 auto; display: block; }
+		input[type=radio]										{ height:30px !important; margin-top:-3px !important; margin-right:5px !important; box-shadow:none; background-color:#ffffff; position:relative !important; }
+		.form-group input, .form-group select 					{ height:30px; padding: 0px 12px; }
+		.form-horizontal .form-group							{ margin:10px; }
+		.formContainer .formControlLabel 						{ width:auto !important; min-width:150px; margin:0; padding:0; }
+		.formControls											{ width:100%; padding:0; margin: 10px 0 20px auto; }
+		.radio 													{ padding-top:0 !important; padding-left:8px !important; }
+		.radio-inline											{ margin-right:10px; padding-top:0 !important; display:inline; }
+		.bold													{ font-weight:bold; }
+		.italic 												{ font-style:italic; }
+		.clear					 								{ width:100%; margin:0 !important; }
+		.rsform-block-submit 									{ display:none; }
+		.show 													{ display: block !important; }
+/*		.rsform-block-placecontent 								{ display:none; } */
+		#submit													{ margin:0 auto; display:block; }
+
+		/* QUIZ STYLES */
+		ol,ul 													{ list-style:none; }
+		strong 													{ font-weight:700; }
+        h4 													    { font-weight:600; padding-top: 60px; padding-bottom: -100px;}
+		#frame 													{ width:auto; max-width: 800px; background:transparent; margin:2px auto; padding:30px; padding-top:20px; color:#333 !important; }
+		div#frame h2 											{ width:auto; border-bottom:1px solid #bdbdbd; padding:0 0 5px 0; font-size:30px; }
+		h3.question 											{ font-size: 20px; font-weight:bold; margin:20px 0; padding:0; font-style:normal; display:block; }
+		p.pager 												{ margin:5px 0 5px; color:#999; text-align:right; }
+        .qnumber 												{ font-size: 25px; font-weight:bold;}
+		.score 													{ width:100%; display:inline-block; margin:30px 0; font-size:100px; text-align:center; }
+		img.question-image 										{ width:100%; height:auto; display:block; max-width:250px; margin:10px auto; border:1px solid #ccc; }
+		#choice-block 											{ display:block; list-style:none; margin:0; padding:0;  cursor: pointer; }
+	/*	#submitbutton 											{ cursor:pointer; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; } */
+	/*	#submitbutton:hover 									{ background:#7b8da6; } */
+		#explanation 											{ width:auto; min-height:100px; margin:0 auto; padding:20px 0; text-align:center; }
+		#explanation span 										{ font-weight:bold; padding-right:8px; }
+		.choice-box 											{ width:100%;  display:block;  text-align:center;  margin:5px auto !important; padding:10px 0 !important; border:1px solid #bdbdbd; }
+		.correct 												{ color:#2c3e50; font-size: 20px; display: block; margin-bottom: 5px; border-bottom: 1px #51a351 solid; padding-bottom: 5px; }
+		.incorrect 												{ color:#f93939; font-size: 20px; display: block; margin-bottom: 5px; border-bottom: 1px #f93939 solid; padding-bottom: 5px; }
+        
+        /*Custom CSS*/
+        h3 {font-style:normal; !important;}
+        .btn-secondary {margin-top: 25px !important; border-color: #f8f9fa !important;}
+        body { hyphens: auto; }
+        .choice-box { white-space:normal !important; word-wrap: break-word; }
+        .btn { padding-left: 10px !important; padding-right: 10px !important; }
+        /*.btn-secondary:hover {background-color:#2980b9}
+        .btn-secondary {margin-top: 20px; background-color:#3498db}
+        
+        .btn-secondary:hover {background-color:#2c3e50}
+        .btn-secondary:active {background-color:#2c3e50}
+        .btn-secondary {margin-top: 20px; background-color:#34495e}*/
+    </style>
+</head>
+<body>
+<div class="form-group rsform-block rsform-block-framecontent">
+    <div id="frame" role="content"></div>
+</div>
+<!--<hr>
+<div class="form-group rsform-block rsform-block-placecontent">
+	<label class="col-sm-3 control-label formControlLabel" data-toggle="tooltip" title="" for="placecontent"></label>
+	<div class="col-sm-6 formControls">
+		<textarea cols="50" rows="5" name="form[placecontent]" id="placecontent" readonly="" class="rsform-text-box form-control rsform-text-box"></textarea>			
+	</div>
+</div>	-->
+	
+<div class="formControls rsform-block-submit" style="text-align: center;">
+    <button type="button" class="btn btn-primary btn-lg" onClick="window.location.reload()">Von vorne beginnen</button>
+</div>
+</body>
+</html>
